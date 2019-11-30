@@ -1,12 +1,13 @@
 ## porting the main module from python2 to python3.
 
-The very first module designed by <a href="https://github.com/danrasband/krtpy">Dan Rasband</a>, in 2010.
-The few lines with deprecated keywords in python3 are modified.
+The very first module is designed by <a href="https://github.com/danrasband/krtpy">Dan Rasband, in 2010.</a>
+Few lines in the code with deprecated keywords of python3 are modified.
 
 |||
 |---|---|
 |python2 | python3 |
 |unichr() | chr() |
+
 krtpy
 =====
 
