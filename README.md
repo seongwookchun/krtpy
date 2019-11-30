@@ -3,7 +3,7 @@
 The very first module is designed by <a href="https://github.com/danrasband/krtpy">Dan Rasband, in 2010.</a>
 Few lines in the code with deprecated keywords of python3 are modified.
 
-
+|   |   |
 |---|---|
 |python2 | python3 |
 |unichr() | chr() |
