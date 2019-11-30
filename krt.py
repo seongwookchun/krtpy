@@ -1,4 +1,4 @@
-import re
+mport re
 
 def hangulize(text, toEncoding):
   """
@@ -111,6 +111,7 @@ def hangulize(text, toEncoding):
           if syllable['vowel'] + char in moum:
             syllable['vowel'] = syllable['vowel'] + char
           else:
+            print(type(syllable), syllable)
             hangul += hangulize_syllable(syllable)
             syllable = {}
             syllable['initial'] = ''
@@ -230,7 +231,7 @@ def hangulize(text, toEncoding):
         else:
           hangul += hangulize_syllable(syllable)
     continue
-  return hangul.encode(toEncoding)
+  return hangul#.encode(toEncoding)
 
 def hangulize_syllable(syl):
   """
@@ -287,7 +288,7 @@ def hangulize_syllable(syl):
     #print fIndex
   
   if sIndex != None:
-    return unichr(sIndex + 12593)
+    return chr(sIndex + 12593)
   else:
     total = 44032
     if iIndex != None:
@@ -296,7 +297,9 @@ def hangulize_syllable(syl):
       total += 28 * vIndex
     if fIndex != None:
       total += fIndex
-    return unichr(total)
+#     return chr(total)
+    # python2 chr() >>> python3 chr()
+    return chr(total)
   return
     
       
@@ -307,8 +310,8 @@ def romanize(raw, fromEnc = 'utf8', toEnc = 'utf8'):
     Returns a romanized string of the text, encoded as specified (default
     'from encoding' is None and default 'to encoding' is utf-8).
   """
-  if fromEnc != None:
-    raw = raw.decode(fromEnc)
+#   if fromEnc != None:
+#     raw = raw.decode(fromEnc)
   newString = ''
   for i in range(len(raw)):
     index = gti(raw[i])
@@ -323,9 +326,10 @@ def romanize(raw, fromEnc = 'utf8', toEnc = 'utf8'):
     # If the index represents a hangul syllable
     elif index in range(44032, 55204):
       index = index - 44032
-      initial = index / 588
-      vowel = (index % 588) / 28
-      final = (index % 588) % 28
+      # ! int형으로 변환
+      initial = int(index / 588)
+      vowel = int((index % 588) / 28)
+      final = int((index % 588) % 28)
       if len(newString) > 0:
         if nonpachim[initial] == 'g' and newString[-1] == 'n':
           newString += '.'
@@ -339,14 +343,15 @@ def romanize(raw, fromEnc = 'utf8', toEnc = 'utf8'):
           newString += '.'
         elif newString[-1] + nonpachim[initial] in pachim + nonpachim or (len(nonpachim[initial]) > 1 and newString[-1] + nonpachim[initial][0] in pachim + nonpachim):
           newString += '.' 
+
       newString += nonpachim[initial]
       newString += moum[vowel]
       newString += pachim[final]
     
     # Otherwise
     else:
-      newString += unichr(index).upper()
-  return newString.encode(toEnc)
+      newString += chr(index).upper()
+  return newString#.encode(toEnc)
 
 
 def gti(char):
