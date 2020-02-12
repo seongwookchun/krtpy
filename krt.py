@@ -1,5 +1,3 @@
-mport re
-
 def hangulize(text, toEncoding):
   """
     Take romanized Korean text and return
