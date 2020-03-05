@@ -1,7 +1,7 @@
 from distutils.core import setup
 setup(name='krt',
   version='alpha1.1.0',
-  py_modules=['engine'],
+  py_modules=['engine', 'utils'],
   author='Dan Rasband',
   author_email='danrasband@gmail.com',
   url='http://code.google.com/p/krtpy'
