@@ -1,3 +1,12 @@
+from .utils.cstr import Cstr
+# test=Cstr('hi')
+# print(test)
+# print(type(test))
+
+# >>> import krt
+# hi
+# <class 'krt.utils.cstr.Cstr'>
+
 def hangulize(text, toEncoding):
   """
     Take romanized Korean text and return
@@ -5,6 +14,14 @@ def hangulize(text, toEncoding):
   """
   output = ''
   toLoop = []
+
+  """
+    Cstr class is added to make this module case sensitive
+  """
+  if type(text) != Cstr:
+    text = Cstr(text)
+                                # from special chr to normal chr
+
   for i in text:
     toLoop.append(i)
   toLoop.reverse()
@@ -229,7 +246,10 @@ def hangulize(text, toEncoding):
         else:
           hangul += hangulize_syllable(syllable)
     continue
-  return hangul#.encode(toEncoding)
+#  return Cstr(hangul#.encode(toEncoding))
+#  return Cstr(hangul.encode(toEncoding))
+  return Cstr(hangul).to_originChr()#.encode(toEncoding)
+
 
 def hangulize_syllable(syl):
   """
@@ -310,7 +330,13 @@ def romanize(raw, fromEnc = 'utf8', toEnc = 'utf8'):
   """
 #   if fromEnc != None:
 #     raw = raw.decode(fromEnc)
+  """
+    Cstr class is added to make this module case sensitive
+  """
+  raw = Cstr(raw).to_specialChr()    # to convert 
+                                     # from normal chr to special chr
   newString = ''
+
   for i in range(len(raw)):
     index = gti(raw[i])
     
@@ -349,7 +375,8 @@ def romanize(raw, fromEnc = 'utf8', toEnc = 'utf8'):
     # Otherwise
     else:
       newString += chr(index).upper()
-  return newString#.encode(toEnc)
+#  return Cstr(newString.encode(toEnc))
+  return Cstr(newString)#.encode(toEnc)
 
 
 def gti(char):
