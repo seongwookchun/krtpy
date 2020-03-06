@@ -2,7 +2,7 @@ from distutils.core import setup
 from setuptools import find_packages
 
 setup(name='krt',
-  version='alpha1.1.4',
+  version='alpha1.1.5',
   # py_modules=['engine', 'utils'],
   #package_dir={"": "krt"},
   #packages=find_packages("krt"),
