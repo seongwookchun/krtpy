@@ -20,7 +20,7 @@ class Cstr(str):
         return Cstr(self.content)
 
     def to_originChr(self):
-        print('to_originChr')
+        #print('to_originChr')
         for idx, c in enumerate(self.content):
             if ord(c) >= self.ord_upper and ord(c) <= (self.ord_upper +25):
                 self.content = (self.content[:idx] + 
